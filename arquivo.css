@@ -1,0 +1,224 @@
+/* Estilos gerais do body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Estilos para o menu de navegação */
+.menu-navegacao {
+    background-color: #2c3e50;
+    padding: 15px 0;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.menu-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.menu-link {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.menu-link:hover {
+    background-color: #34495e;
+    color: #ffffff;
+}
+
+.menu-link:active {
+    background-color: #1a252f;
+}
+
+/* Estilos para títulos h1 */
+h1 {
+    color: #2c3e50;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#primeiro_H1 {
+    color: pink;
+}
+
+.titulo-pagina {
+    color: #27ae60;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Estilos para títulos h2 */
+h2 {
+    color: #34495e;
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+/* Estilos para parágrafos */
+p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+p:first-of-type {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Estilos para listas */
+ul {
+    background-color: #ffffff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
+li:hover {
+    background-color: #ecf0f1;
+    padding-left: 10px;
+    transition: padding-left 0.3s;
+}
+
+li:first-child {
+    font-weight: bold;
+    color: #3498db;
+}
+
+/* Estilos para links */
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+#link1:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #8e44ad;
+}
+
+a:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* Estilos para imagens */
+img {
+    margin: 10px;
+    border: 3px solid #bdc3c7;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+img:hover {
+    transform: scale(1.05);
+    border-color: #3498db;
+}
+
+img:first-of-type {
+    border-color: #e74c3c;
+}
+
+/* Estilos para iframes */
+iframe {
+    margin: 20px;
+    border: 2px solid #34495e;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+iframe:hover {
+    border-color: #3498db;
+}
+
+/* Estilos para tabelas */
+table {
+    width: 80%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.tabela-projetos {
+    width: 70%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+.cabecalho-tabela th {
+    background-color: #27ae60;
+}
+
+td:hover {
+    background-color: #ecf0f1;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #e8f4f8;
+}
+
+/* Container para conteúdo */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Estilos para IDs */
+#pri_h3 {
+    color: red;
+}

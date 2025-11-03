@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="arquivo.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Luan de Oliveira Manoel</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container-cadastro {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        input {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .link-login {
+            margin-top: 20px;
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .link-login:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="menu-navegacao">
+        <ul class="menu-lista">
+            <li><a href="/" class="menu-link">Projetos</a></li>
+        </ul>
+    </nav>
+
+    <div class="container-cadastro">
+        <h1>Cadastro</h1>
+        <form action="/cadastra" method="POST">
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <a href="/login" class="link-login">Já tem uma conta? Faça login</a>
+    </div>
+
+</body>
+</html>
+

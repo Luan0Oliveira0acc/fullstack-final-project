@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="arquivo.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivinhação - Luan de Oliveira Manoel</title>
+    <style>
+        body {
+            background-color: #e8f5e9;
+        }
+        
+        .container-jogo {
+            text-align: center;
+            margin: 50px auto;
+            padding: 30px;
+            max-width: 500px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .input-numero {
+            padding: 10px;
+            font-size: 18px;
+            margin: 20px 0;
+            width: 200px;
+            text-align: center;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+        }
+        
+        .botao-verificar {
+            padding: 12px 30px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .botao-verificar:hover {
+            background-color: #2980b9;
+        }
+        
+        .mensagem {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="menu-navegacao">
+        <ul class="menu-lista">
+            <li><a href="projects.html" class="menu-link">Projetos</a></li>
+        </ul>
+    </nav>
+
+    <div class="container-jogo" id="container-jogo">
+        <h1 class="titulo-pagina">Jogo de Adivinhação</h1>
+        
+        <p>Digite um número entre 0 e 100:</p>
+        
+        <input type="number" id="numero-input" class="input-numero" min="0" max="100" placeholder="Digite um número">
+        
+        <br>
+        
+        <button onclick="verificarNumero()" class="botao-verificar">Verificar</button>
+        
+        <div id="mensagem" class="mensagem"></div>
+    </div>
+
+    <script>
+        // Gerar número aleatório entre 0 e 100 (inclusive)
+        var numeroAleatorio = Math.floor(Math.random() * 101);
+        
+        function verificarNumero() {
+            var input = document.getElementById("numero-input");
+            var mensagem = document.getElementById("mensagem");
+            var container = document.getElementById("container-jogo");
+            var numeroUsuario = parseInt(input.value);
+            
+            // Verificar se o input está vazio ou não é um número válido
+            if (isNaN(numeroUsuario)) {
+                mensagem.textContent = "Por favor, digite um número válido!";
+                mensagem.style.color = "#e74c3c";
+                return;
+            }
+            
+            // Verificar se o número está no range válido
+            if (numeroUsuario < 0 || numeroUsuario > 100) {
+                mensagem.textContent = "Por favor, digite um número entre 0 e 100!";
+                mensagem.style.color = "#e74c3c";
+                return;
+            }
+            
+            // Estrutura de condição if para verificar maior, menor ou igual
+            if (numeroUsuario > numeroAleatorio) {
+                mensagem.textContent = "Muito alto! Tente um número menor.";
+                mensagem.style.color = "#e74c3c";
+                // Alterar cor de fundo para vermelho quando errar
+                container.style.setProperty("background-color", "red");
+            } else if (numeroUsuario < numeroAleatorio) {
+                mensagem.textContent = "Muito baixo! Tente um número maior.";
+                mensagem.style.color = "#e74c3c";
+                // Alterar cor de fundo para vermelho quando errar
+                container.style.setProperty("background-color", "red");
+            } else {
+                mensagem.textContent = "Parabéns! Você acertou! O número era " + numeroAleatorio;
+                mensagem.style.color = "#27ae60";
+                // Alterar cor de fundo para verde quando acertar
+                container.style.setProperty("background-color", "#d4edda");
+                // Gerar novo número aleatório para próxima rodada
+                numeroAleatorio = Math.floor(Math.random() * 101);
+            }
+        }
+    </script>
+
+</body>
+</html>
+

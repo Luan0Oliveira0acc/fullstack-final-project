@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="arquivo.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animação - Luan de Oliveira Manoel</title>
+    <style>
+        body {
+            background-image: url("iluminado.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .container-animacao {
+            text-align: center;
+            background-color: transparent;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: none;
+        }
+        
+        .titulo-pagina {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .machado-texto {
+            color: #ff0000;
+            text-shadow: 
+                0 0 10px rgba(255, 0, 0, 0.9),
+                0 0 20px rgba(255, 0, 0, 0.7),
+                0 0 30px rgba(255, 0, 0, 0.5),
+                0 0 40px rgba(255, 0, 0, 0.4),
+                0 0 50px rgba(255, 0, 0, 0.3),
+                0 0 60px rgba(255, 0, 0, 0.2),
+                3px 3px 0px rgba(139, 0, 0, 0.9),
+                6px 6px 0px rgba(139, 0, 0, 0.7),
+                9px 9px 0px rgba(139, 0, 0, 0.5);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: brilhoVermelhoMachado 1.5s ease-in-out infinite;
+            display: inline-block;
+            filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.8));
+        }
+        
+        .animacao-texto {
+            color: #cc0000;
+            font-size: 0.7em;
+            font-weight: 600;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+        
+        @keyframes brilhoVermelhoMachado {
+            0%, 100% {
+                text-shadow: 
+                    0 0 10px rgba(255, 0, 0, 0.9),
+                    0 0 20px rgba(255, 0, 0, 0.7),
+                    0 0 30px rgba(255, 0, 0, 0.5),
+                    0 0 40px rgba(255, 0, 0, 0.4),
+                    0 0 50px rgba(255, 0, 0, 0.3),
+                    0 0 60px rgba(255, 0, 0, 0.2),
+                    3px 3px 0px rgba(139, 0, 0, 0.9),
+                    6px 6px 0px rgba(139, 0, 0, 0.7),
+                    9px 9px 0px rgba(139, 0, 0, 0.5);
+                transform: scale(1);
+                filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.8));
+            }
+            50% {
+                text-shadow: 
+                    0 0 15px rgba(255, 0, 0, 1),
+                    0 0 30px rgba(255, 0, 0, 0.9),
+                    0 0 45px rgba(255, 0, 0, 0.7),
+                    0 0 60px rgba(255, 0, 0, 0.5),
+                    0 0 75px rgba(255, 0, 0, 0.4),
+                    0 0 90px rgba(255, 0, 0, 0.3),
+                    3px 3px 0px rgba(139, 0, 0, 1),
+                    6px 6px 0px rgba(139, 0, 0, 0.9),
+                    9px 9px 0px rgba(139, 0, 0, 0.7);
+                transform: scale(1.08);
+                filter: drop-shadow(0 0 15px rgba(255, 0, 0, 1)) drop-shadow(0 0 25px rgba(255, 0, 0, 0.8));
+            }
+        }
+        
+        canvas {
+            border: none;
+            display: block;
+            margin: 20px auto;
+            cursor: none;
+            background: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="menu-navegacao">
+        <ul class="menu-lista">
+            <li><a href="projects.html" class="menu-link">Projetos</a></li>
+        </ul>
+    </nav>
+
+    <div class="container-animacao">
+        <h1 class="titulo-pagina"><span class="machado-texto">MACHADO</span> <span class="animacao-texto">(animação)</span></h1>
+        <canvas id="meuCanvas" width="300" height="300"></canvas>
+    </div>
+
+    <script>
+        var canvas = document.getElementById("meuCanvas");
+        var ctx = canvas.getContext("2d");
+        
+        // Carregar a imagem
+        var img = new Image();
+        img.src = "paralab.jpg";
+        
+        // Posição inicial da imagem (centro do canvas)
+        var imagemX = 150;
+        var imagemY = 150;
+        var larguraImagem = 50; // Largura da imagem
+        var alturaImagem = 50; // Altura da imagem
+        
+        // Posição anterior para criar o rastro
+        var anteriorX = 150;
+        var anteriorY = 150;
+        
+        // Array para armazenar gotas de sangue
+        var gotasSangue = [];
+        
+        // Desenhar rastro de sangue
+        function desenharRastroSangue() {
+            // Desenhar linha de sangue entre posição anterior e atual
+            ctx.strokeStyle = "rgba(139, 0, 0, 0.8)"; // Vermelho escuro
+            ctx.lineWidth = 3;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.beginPath();
+            ctx.moveTo(anteriorX, anteriorY);
+            ctx.lineTo(imagemX, imagemY);
+            ctx.stroke();
+            
+            // Desenhar gotas de sangue ao longo do caminho
+            ctx.fillStyle = "rgba(139, 0, 0, 0.9)";
+            var distancia = Math.sqrt(Math.pow(imagemX - anteriorX, 2) + Math.pow(imagemY - anteriorY, 2));
+            var numGotas = Math.floor(distancia / 5); // Uma gota a cada 5 pixels
+            
+            for (var i = 0; i < numGotas; i++) {
+                var t = i / numGotas;
+                var x = anteriorX + (imagemX - anteriorX) * t;
+                var y = anteriorY + (imagemY - anteriorY) * t;
+                
+                // Adicionar variação aleatória
+                var offsetX = (Math.random() - 0.5) * 3;
+                var offsetY = (Math.random() - 0.5) * 3;
+                var tamanho = 2 + Math.random() * 2;
+                
+                ctx.beginPath();
+                ctx.arc(x + offsetX, y + offsetY, tamanho, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+            
+            // Desenhar gotas maiores ocasionais
+            if (Math.random() < 0.3) {
+                var t = Math.random();
+                var x = anteriorX + (imagemX - anteriorX) * t;
+                var y = anteriorY + (imagemY - anteriorY) * t;
+                ctx.fillStyle = "rgba(139, 0, 0, 0.7)";
+                ctx.beginPath();
+                ctx.arc(x, y, 4 + Math.random() * 3, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+        
+        // Desenhar a imagem
+        function desenharImagem() {
+            // Não limpar completamente - deixar o rastro visível
+            // Apenas desbotar gradualmente o rastro antigo
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, 300, 300);
+            
+            // Desenhar rastro de sangue
+            if (anteriorX !== imagemX || anteriorY !== imagemY) {
+                desenharRastroSangue();
+            }
+            
+            // Desenhar a imagem (ponteiro centralizado na imagem)
+            if (img.complete) {
+                ctx.drawImage(
+                    img, 
+                    imagemX - larguraImagem/2, 
+                    imagemY - alturaImagem/2, 
+                    larguraImagem, 
+                    alturaImagem
+                );
+            }
+        }
+        
+        // Quando a imagem carregar, desenhar
+        img.onload = function() {
+            desenharImagem();
+        };
+        
+        // Evento de movimento do mouse
+        canvas.addEventListener("mousemove", function(event) {
+            // Obter posição do mouse relativa ao canvas
+            var rect = canvas.getBoundingClientRect();
+            var mouseX = event.clientX - rect.left;
+            var mouseY = event.clientY - rect.top;
+            
+            // Garantir que a imagem não saia do canvas
+            // A imagem deve estar com o ponteiro centralizado nela
+            // Então a posição da imagem é o mouse menos o offset do centro
+            
+            // Limitar a posição para que a imagem nunca saia do canvas
+            var minX = larguraImagem / 2;
+            var maxX = 300 - larguraImagem / 2;
+            var minY = alturaImagem / 2;
+            var maxY = 300 - alturaImagem / 2;
+            
+            // Atualizar posição anterior antes de mudar
+            anteriorX = imagemX;
+            anteriorY = imagemY;
+            
+            // Calcular nova posição (ponteiro centralizado na imagem)
+            imagemX = mouseX;
+            imagemY = mouseY;
+            
+            // Limitar dentro dos limites do canvas
+            if (imagemX < minX) {
+                imagemX = minX;
+            } else if (imagemX > maxX) {
+                imagemX = maxX;
+            }
+            
+            if (imagemY < minY) {
+                imagemY = minY;
+            } else if (imagemY > maxY) {
+                imagemY = maxY;
+            }
+            
+            // Redesenhar a imagem com rastro
+            desenharImagem();
+        });
+        
+        // Evento quando o mouse sai do canvas
+        canvas.addEventListener("mouseleave", function(event) {
+            // Manter a última posição válida (não fazer nada)
+            // A imagem já está limitada aos limites do canvas
+        });
+        
+        // Desenhar a imagem inicial (se já estiver carregada)
+        if (img.complete) {
+            desenharImagem();
+        }
+    </script>
+
+</body>
+</html>
+

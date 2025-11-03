@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="arquivo.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas - Luan de Oliveira Manoel</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container-canvas {
+            text-align: center;
+            background-color: transparent;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: none;
+            margin: 50px auto;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        
+        .canvas-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        canvas {
+            border: 1px solid #000;
+            display: block;
+            margin: 10px;
+        }
+        
+        #canvasMachado {
+            border: none !important;
+            background: transparent !important;
+        }
+        
+        .canvas-wrapper:has(#canvasMachado) {
+            background: transparent;
+        }
+        
+        h2 {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="menu-navegacao">
+        <ul class="menu-lista">
+            <li><a href="projects.html" class="menu-link">Projetos</a></li>
+        </ul>
+    </nav>
+
+    <div class="container-canvas">
+        <div class="canvas-wrapper">
+            <h2>Canvas 1</h2>
+            <canvas id="meuCanvas" width="300" height="300"></canvas>
+        </div>
+        
+        <div class="canvas-wrapper">
+            <h2>Canvas 2</h2>
+            <canvas id="canvasPaisagem" width="300" height="300"></canvas>
+        </div>
+        
+        <div class="canvas-wrapper" style="background: transparent;">
+            <h2>MACHADO</h2>
+            <canvas id="canvasMachado" width="300" height="300" style="background: transparent; border: none;"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // ========== CANVAS 1 - Grid Design ==========
+        var canvas = document.getElementById("meuCanvas");
+        var ctx = canvas.getContext("2d");
+        
+        // Função para desenhar quadrado
+        function desenhar_quadrado(x, y, largura, altura, cor) {
+            ctx.fillStyle = cor;
+            ctx.fillRect(x, y, largura, altura);
+        }
+        
+        // Função para desenhar linha
+        function desenhar_linha(x1, y1, x2, y2, cor, espessura) {
+            ctx.strokeStyle = cor;
+            ctx.lineWidth = espessura || 2;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+        }
+        
+        // Função para desenhar arco
+        function desenhar_arco(centroX, centroY, raio, anguloInicio, anguloFim, cor, espessura) {
+            ctx.strokeStyle = cor;
+            ctx.lineWidth = espessura || 1;
+            ctx.beginPath();
+            ctx.arc(centroX, centroY, raio, anguloInicio, anguloFim);
+            ctx.stroke();
+        }
+        
+        // Função para escrever texto
+        function escrever(texto, x, y, cor, tamanho) {
+            ctx.fillStyle = cor;
+            ctx.font = (tamanho || 20) + "px Arial";
+            ctx.textAlign = "center";
+            ctx.fillText(texto, x, y);
+        }
+        
+        // Desenhar todas as formas conforme o modelo
+        
+        // 1. Escrever "Canvas" no topo
+        escrever("Canvas", 150, 50, "#000", 20);
+        
+        // 2. Linhas verdes (grid)
+        // Linha horizontal no meio
+        desenhar_linha(0, 150, 300, 150, "green", 1);
+        // Linha vertical no meio
+        desenhar_linha(150, 0, 150, 300, "green", 1);
+        
+        // Arcos superiores - quadrantes (centro 150,150)
+        // Topo-esquerda (180° a 270°)
+        desenhar_arco(150, 150, 50, Math.PI, 3 * Math.PI / 2, "green", 1);
+        desenhar_arco(150, 150, 100, Math.PI, 3 * Math.PI / 2, "green", 1);
+        // Topo-direita (270° a 0°)
+        desenhar_arco(150, 150, 50, 3 * Math.PI / 2, 0, "green", 1);
+        desenhar_arco(150, 150, 100, 3 * Math.PI / 2, 0, "green", 1);
+        
+        // Arcos inferiores - quadrantes
+        // Inferior-esquerda (90° a 180°)
+        desenhar_arco(150, 150, 50, Math.PI / 2, Math.PI, "green", 1);
+        desenhar_arco(150, 150, 100, Math.PI / 2, Math.PI, "green", 1);
+        // Inferior-direita (0° a 90°)
+        desenhar_arco(150, 150, 50, 0, Math.PI / 2, "green", 1);
+        desenhar_arco(150, 150, 100, 0, Math.PI / 2, "green", 1);
+        
+        // Linhas horizontais curtas no meio dos quadrantes (esquerda e direita)
+        desenhar_linha(0, 100, 150, 100, "green", 1);
+        desenhar_linha(150, 200, 300, 200, "green", 1);
+        
+        // 3. Formas preenchidas
+        // Quadrado azul topo-esquerda
+        desenhar_quadrado(0, 0, 50, 50, "blue");
+        
+        // Quadrado vermelho topo-direita
+        desenhar_quadrado(250, 0, 50, 50, "red");
+        
+        // Círculo cyan centro-topo (150,100, raio 10)
+        ctx.fillStyle = "cyan";
+        ctx.beginPath();
+        ctx.arc(150, 100, 10, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // Quadrado vermelho centro (centro em 150,150, tamanho ~30x30)
+        desenhar_quadrado(135, 135, 30, 30, "red");
+        
+        // Retângulo cyan esquerda (centro vertical no meio-esquerda)
+        desenhar_quadrado(30, 125, 20, 50, "cyan");
+        
+        // Retângulo cyan direita (centro vertical no meio-direita)
+        desenhar_quadrado(250, 125, 20, 50, "cyan");
+        
+        // L amarelo inferior-esquerda (50x50 com corte de 25x25 no topo-direita)
+        desenhar_quadrado(0, 250, 50, 50, "yellow");
+        ctx.fillStyle = "#ffffff"; // cor do canvas
+        ctx.fillRect(25, 250, 25, 25);
+        
+        // L preto inferior-direita (50x50 com corte de 25x25 no topo-esquerda)
+        desenhar_quadrado(250, 250, 50, 50, "black");
+        ctx.fillStyle = "#ffffff"; // cor do canvas
+        ctx.fillRect(250, 250, 25, 25);
+        
+        // Semi-círculo cyan inferior-centro (150,200, raio 25, de 180° a 360°)
+        ctx.fillStyle = "cyan";
+        ctx.beginPath();
+        ctx.arc(150, 200, 25, Math.PI, 2 * Math.PI);
+        ctx.fill();
+        
+        // Círculo amarelo esquerda (80,220, raio 15)
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.arc(80, 220, 15, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // Círculo amarelo direita (220,220, raio 15)
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.arc(220, 220, 15, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // 4. Linhas coloridas (espessura 2px)
+        // Linha azul: (50,50) para (150,100)
+        desenhar_linha(50, 50, 150, 100, "blue", 2);
+        
+        // Linha vermelha diagonal: (250,50) para (150,100)
+        desenhar_linha(250, 50, 150, 100, "red", 2);
+        
+        // Linha preta vertical: (150,110) para (150,165)
+        desenhar_linha(150, 110, 150, 165, "black", 2);
+        
+        
+        // ========== CANVAS 2 - Paisagem ==========
+        var canvas2 = document.getElementById("canvasPaisagem");
+        var ctx2 = canvas2.getContext("2d");
+        
+        // Céu (azul claro/cyan no topo)
+        ctx2.fillStyle = "#87CEEB"; // sky blue
+        ctx2.fillRect(0, 0, 300, 200);
+        
+        // Chão (cinza na parte inferior)
+        ctx2.fillStyle = "#808080"; // grey
+        ctx2.fillRect(0, 200, 300, 100);
+        
+        // Colina esquerda (cinza mais escuro)
+        ctx2.fillStyle = "#696969"; // dark grey
+        ctx2.beginPath();
+        ctx2.moveTo(0, 200);
+        ctx2.lineTo(80, 200);
+        ctx2.lineTo(60, 180);
+        ctx2.lineTo(40, 160);
+        ctx2.lineTo(20, 170);
+        ctx2.lineTo(0, 190);
+        ctx2.closePath();
+        ctx2.fill();
+        
+        // Sol (círculo amarelo no canto superior direito)
+        ctx2.fillStyle = "yellow";
+        ctx2.beginPath();
+        ctx2.arc(250, 50, 40, 0, 2 * Math.PI);
+        ctx2.fill();
+        
+        // Casa
+        // Corpo da casa (retângulo marrom)
+        ctx2.fillStyle = "#8B4513"; // brown
+        ctx2.fillRect(100, 170, 100, 60);
+        
+        // Telhado (triângulo laranja avermelhado)
+        ctx2.fillStyle = "#FF6347"; // tomato/coral
+        ctx2.beginPath();
+        ctx2.moveTo(90, 170);
+        ctx2.lineTo(150, 130);
+        ctx2.lineTo(210, 170);
+        ctx2.closePath();
+        ctx2.fill();
+        
+        // Janelas (retângulos azuis)
+        ctx2.fillStyle = "blue";
+        ctx2.fillRect(110, 180, 20, 20);
+        ctx2.fillRect(170, 180, 20, 20);
+        
+        // Porta (retângulo marrom)
+        ctx2.fillStyle = "#654321"; // dark brown
+        ctx2.fillRect(140, 210, 20, 20);
+        
+        // Árvore esquerda
+        // Tronco
+        ctx2.fillStyle = "#8B4513"; // brown
+        ctx2.fillRect(30, 190, 15, 30);
+        // Copa (círculo verde)
+        ctx2.fillStyle = "green";
+        ctx2.beginPath();
+        ctx2.arc(37, 190, 20, 0, 2 * Math.PI);
+        ctx2.fill();
+        
+        // Árvore direita
+        // Tronco
+        ctx2.fillStyle = "#8B4513"; // brown
+        ctx2.fillRect(255, 190, 15, 30);
+        // Copa (círculo verde)
+        ctx2.fillStyle = "green";
+        ctx2.beginPath();
+        ctx2.arc(262, 190, 20, 0, 2 * Math.PI);
+        ctx2.fill();
+        
+        // Água (L-shaped azul no canto inferior esquerdo)
+        ctx2.fillStyle = "blue";
+        ctx2.beginPath();
+        ctx2.moveTo(0, 200);
+        ctx2.lineTo(0, 300);
+        ctx2.lineTo(60, 300);
+        ctx2.lineTo(60, 240);
+        ctx2.quadraticCurveTo(60, 220, 40, 220);
+        ctx2.lineTo(20, 220);
+        ctx2.lineTo(20, 200);
+        ctx2.closePath();
+        ctx2.fill();
+        
+        // ========== CANVAS 3 - Machado ==========
+        var canvas3 = document.getElementById("canvasMachado");
+        var ctx3 = canvas3.getContext("2d");
+        
+        // Fundo transparente - não desenhar nada, deixar transparente
+        // O canvas HTML tem fundo branco por padrão, então vamos usar clearRect
+        // e não desenhar nenhum fundo
+        
+        var centroX = 150;
+        var yTopo = 20; // Topo da cabeça do machado
+        var yBase = 290; // Base do cabo
+        
+        // ========== CABO DO MACHADO ==========
+        // Cabo longo de madeira clara (bege/pardo claro)
+        var comprimentoCabo = yBase - yTopo - 50; // Comprimento do cabo
+        var larguraCaboTopo = 12;
+        var larguraCaboBase = 8;
+        var yInicioCabo = yTopo + 50; // Início do cabo (após a cabeça)
+        
+        // Parte principal do cabo (madeira clara)
+        ctx3.fillStyle = "#D4A574"; // bege claro
+        // Desenhar cabo afunilando gradualmente
+        for (var i = 0; i < comprimentoCabo * 0.8; i++) {
+            var y = yInicioCabo + i;
+            var largura = larguraCaboTopo - (larguraCaboTopo - larguraCaboBase) * (i / (comprimentoCabo * 0.8));
+            ctx3.fillRect(centroX - largura/2, y, largura, 1);
+        }
+        
+        // Parte inferior do cabo (afunilamento mais pronunciado)
+        var inicioAfunilamento = yInicioCabo + comprimentoCabo * 0.8;
+        ctx3.beginPath();
+        ctx3.moveTo(centroX - larguraCaboBase - 2, inicioAfunilamento);
+        ctx3.lineTo(centroX - larguraCaboBase/2, yBase - comprimentoCabo * 0.2);
+        ctx3.lineTo(centroX + larguraCaboBase/2, yBase - comprimentoCabo * 0.2);
+        ctx3.lineTo(centroX + larguraCaboBase + 2, inicioAfunilamento);
+        ctx3.closePath();
+        ctx3.fill();
+        
+        // Grip escuro (preto/cinza escuro) na parte inferior (1/5 do cabo)
+        var alturaGrip = comprimentoCabo * 0.2;
+        var yInicioGrip = yBase - alturaGrip;
+        ctx3.fillStyle = "#1A1A1A"; // quase preto
+        ctx3.beginPath();
+        ctx3.moveTo(centroX - larguraCaboBase/2 - 1, yInicioGrip);
+        ctx3.lineTo(centroX - larguraCaboBase/2 - 2, yBase - 5);
+        ctx3.lineTo(centroX + larguraCaboBase/2 + 2, yBase - 5);
+        ctx3.lineTo(centroX + larguraCaboBase/2 + 1, yInicioGrip);
+        ctx3.closePath();
+        ctx3.fill();
+        
+        // Lanyard (loop de couro marrom claro) pendurado à direita
+        ctx3.fillStyle = "#A0826D"; // marrom claro
+        ctx3.beginPath();
+        ctx3.arc(centroX + 4, yBase - 3, 3, 0, 2 * Math.PI);
+        ctx3.fill();
+        ctx3.strokeStyle = "#8B6F47";
+        ctx3.lineWidth = 1;
+        ctx3.stroke();
+        
+        // ========== CABEÇA DO MACHADO ==========
+        var yCabeca = yTopo;
+        var larguraCabeca = 90;
+        var alturaCabeca = 40;
+        
+        // Cabeça do machado (metal prata/cinza) - desenhar primeiro
+        ctx3.fillStyle = "#C0C0C0"; // prata
+        ctx3.fillRect(centroX - larguraCabeca/2, yCabeca, larguraCabeca, alturaCabeca);
+        
+        // Orifício onde o cabo passa
+        ctx3.fillStyle = "#FFFFFF"; // branco
+        ctx3.beginPath();
+        ctx3.arc(centroX, yCabeca + alturaCabeca/2, 7, 0, 2 * Math.PI);
+        ctx3.fill();
+        ctx3.strokeStyle = "#808080";
+        ctx3.lineWidth = 1.5;
+        ctx3.stroke();
+        
+        // Parte de metal visível acima da bainha (arredondada, onde encontra o cabo)
+        ctx3.fillStyle = "#C0C0C0"; // prata
+        ctx3.beginPath();
+        ctx3.arc(centroX, yCabeca + 20, 10, 0, 2 * Math.PI);
+        ctx3.fill();
+        ctx3.strokeStyle = "#999999";
+        ctx3.lineWidth = 1;
+        ctx3.stroke();
+        
+        // Lâmina do machado (base retangular + semi-círculo na ponta)
+        var xLamina = centroX - larguraCabeca/2;
+        var yLamina = yCabeca;
+        var larguraLamina = 28;
+        var alturaLamina = 55;
+        
+        // Base retangular da lâmina
+        ctx3.fillStyle = "#C0C0C0"; // prata
+        ctx3.fillRect(xLamina, yLamina, larguraLamina, alturaLamina);
+        
+        // Parte traseira (poll) do machado - arredondada
+        var xPoll = centroX + larguraCabeca/2;
+        ctx3.fillStyle = "#C0C0C0"; // prata
+        ctx3.beginPath();
+        ctx3.arc(xPoll, yCabeca + alturaCabeca/2, 18, 0, 2 * Math.PI);
+        ctx3.fill();
+        ctx3.strokeStyle = "#808080";
+        ctx3.lineWidth = 1;
+        ctx3.stroke();
+        
+        // ========== BAINHA DE COURO ==========
+        // Bainha de couro marrom claro cobrindo toda a lâmina de corte
+        ctx3.fillStyle = "#A0826D"; // marrom claro couro
+        
+        // Cobertura da lâmina (sem o círculo cortado à esquerda)
+        // Base retangular da bainha
+        ctx3.fillRect(xLamina - 3, yLamina - 3, larguraLamina + 6, alturaLamina + 6);
+        
+        // Costura visível na bainha (linhas de costura)
+        ctx3.strokeStyle = "#8B6F47"; // marrom mais escuro para costura
+        ctx3.lineWidth = 1;
+        // Linhas de costura horizontais
+        for (var i = 0; i < 3; i++) {
+            var yCostura = yLamina + 10 + i * 15;
+            ctx3.beginPath();
+            ctx3.moveTo(xLamina - 2, yCostura);
+            ctx3.lineTo(xLamina + larguraLamina + 2, yCostura);
+            ctx3.stroke();
+        }
+        
+        // ========== TIRA DE COURO ==========
+        // Tira de couro ao redor do cabo logo abaixo da cabeça
+        var yTira = yCabeca + alturaCabeca + 3;
+        ctx3.fillStyle = "#A0826D"; // marrom claro
+        ctx3.fillRect(centroX - 10, yTira, 20, 5);
+        
+        
+        // ========== DETALHES FINAIS ==========
+        // Brilho na cabeça de metal
+        ctx3.fillStyle = "rgba(255, 255, 255, 0.4)";
+        ctx3.fillRect(centroX - larguraCabeca/2 + 8, yCabeca + 8, larguraCabeca - 16, 10);
+        
+        // Textura do cabo (linhas sutis)
+        ctx3.strokeStyle = "#C4A574";
+        ctx3.lineWidth = 0.5;
+        for (var i = 0; i < 5; i++) {
+            var yLinha = yInicioCabo + 30 + i * 40;
+            ctx3.beginPath();
+            ctx3.moveTo(centroX - 4, yLinha);
+            ctx3.lineTo(centroX + 4, yLinha);
+            ctx3.stroke();
+        }
+    </script>
+
+</body>
+</html>
