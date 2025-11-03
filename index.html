@@ -2,72 +2,369 @@
 <html lang="pt-BR">
 <head>
     <link rel="stylesheet" href="arquivo.css">
-   <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <title>Luan de Oliveira Manoel</title>   
-    </head>
-   
+    <title>Portfólio - Luan de Oliveira Manoel</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container-portfolio {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Seção Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        #primeiro_H1 {
+            color: white !important;
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        /* Seção Sobre */
+        .sobre {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .sobre p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+        }
+        
+        /* Seção Habilidades */
+        .habilidades {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .habilidades h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .habilidades ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .habilidades li {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        
+        .habilidades li:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Carrossel CSS */
+        .carrossel-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .carrossel-container h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .carrossel-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            height: 400px;
+        }
+        
+        .carrossel {
+            display: flex;
+            width: 500%;
+            transition: transform 0.5s ease;
+            transform: translateX(0);
+        }
+        
+        .carrossel-item {
+            width: 20%;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .carrossel-item img {
+            max-width: 100%;
+            max-height: 360px;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Botões de navegação */
+        .carrossel-botoes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .btn-carrossel {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        
+        .btn-carrossel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        .btn-carrossel:active {
+            transform: translateY(0);
+        }
+        
+        .btn-carrossel:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Seção Contato */
+        .contato {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .contato h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .contato-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .contato-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .contato-links a:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* Iframes */
+        .iframe-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .iframe-container h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .iframe-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .iframe-wrapper iframe {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+
 <body>
     <nav class="menu-navegacao">
         <ul class="menu-lista">
-            <li><a href="projects.html" class="menu-link">Projetos</a></li>
+            <li><a href="/" class="menu-link">Projetos</a></li>
+            <li><a href="https://github.com/Luan0Oliveira0acc" target="_blank" class="menu-link">GitHub</a></li>
         </ul>
     </nav>
 
-<div id="primeiro_H1">
-    <h1>Luan de Oliveira Manoel</h1>
-</div>
+    <div class="container-portfolio">
+        <!-- Seção Hero -->
+        <div class="hero">
+            <div id="primeiro_H1">
+                <h1>Luan de Oliveira Manoel</h1>
+            </div>
+            <p class="subtitle">Desenvolvedor Fullstack | Estudante de Ciência da Computação</p>
+        </div>
 
-    <p>Olá! Sou Luan de Oliveira Manoel, desenvolvedor fullstack apaixonado por tecnologia e programação. Atualmente estudo desenvolvimento web e estou construindo minha carreira na área de tecnologia.</p>
-    
-    <h2>Habilidades e Tecnologias</h2>
-    <ul>
-        <li>HTML e CSS</li>
-        <li>JavaScript</li>
-        <li>Desenvolvimento Frontend</li>
-        <li>Desenvolvimento Backend</li>
-        <li>Versionamento com Git</li>
-    </ul>
-    
-    <p>Veja mais <a id="link1" href="https://machados.com/"> MACHADOS</a></p>
-    <p>Veja mais outros <a href="https://www.magazineluiza.com.br/machado-tramontina-35-libras-com-cabo-77322-534-tramontina-multi/p/ag78d3af80/fj/hado/?utm_source=bing&utm_medium=cpc&utm_campaign=bing_eco_per_ven_sho_all_sor_3p_all-products-std&partner_id=77025&utm_term=77025&gclid=e07deee98d5b15a070d1864a34aa1166&gclsrc=3p.ds&msclkid=e07deee98d5b15a070d1864a34aa1166"> MACHADOS</a></p>
-    <p>Promoções de <a href="https://www.machadosupermercados.com.br/promocoes"> MACHADOS</a></p>
-    
-    <h2>Galeria de Imagens</h2>
-    <img src="img/machado.png.webp" alt="Machado">
-    <img src="img/draven.webp" alt="Imagem do portfólio">
-    <img src="img/images.jfif" alt="Imagem do portfólio">
-    <img src="img/novosmachados.jpg" alt="Novos machados">
-    <img src="img/olaf ou algo do tipo.jfif" alt="Imagem do portfólio">
+        <!-- Seção Sobre -->
+        <div class="sobre">
+            <h2>Sobre Mim</h2>
+            <p>Olá! Sou Luan de Oliveira Manoel, desenvolvedor fullstack apaixonado por tecnologia e programação. Atualmente estudo desenvolvimento web e estou construindo minha carreira na área de tecnologia. Com experiência em desenvolvimento frontend e backend, busco sempre aprender novas tecnologias e criar soluções inovadoras que façam a diferença.</p>
+        </div>
 
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7907.922891673966!2d-35.51629905514537!3d-7.687286669319434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab93adfcb09769%3A0xb5c9925235143a62!2sMachados%2C%20PE!5e0!3m2!1spt-BR!2sbr!4v1755558647357!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dX9GsvYo_GI?si=Svvrn-qxlq5jrjlT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/HN5echqwhAE?si=5OiSkx5PAZMRsxCd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<table>
-    <tr>
-        <td>
-            carros
-        </td>
-        <td>
-            machados
-        </td>
-    </tr>
-     <tr>
-        <td>
-            carros
-        </td>
-        <td>
-            machados
-        </td>
-    </tr>
+        <!-- Seção Habilidades -->
+        <div class="habilidades">
+            <h2>Habilidades e Tecnologias</h2>
+            <ul>
+                <li>HTML e CSS</li>
+                <li>JavaScript</li>
+                <li>Desenvolvimento Frontend</li>
+                <li>Desenvolvimento Backend</li>
+                <li>Node.js e Express</li>
+                <li>EJS Templates</li>
+                <li>Versionamento com Git</li>
+                <li>Canvas API</li>
+            </ul>
+        </div>
 
+        <!-- Carrossel de Imagens -->
+        <div class="carrossel-container">
+            <h2>Galeria de Projetos</h2>
+            <div class="carrossel-wrapper">
+                <div class="carrossel" id="carrossel">
+                    <div class="carrossel-item">
+                        <img src="img/machado.png.webp" alt="Projeto 1">
+                    </div>
+                    <div class="carrossel-item">
+                        <img src="img/draven.webp" alt="Projeto 2">
+                    </div>
+                    <div class="carrossel-item">
+                        <img src="img/images.jfif" alt="Projeto 3">
+                    </div>
+                    <div class="carrossel-item">
+                        <img src="img/novosmachados.jpg" alt="Projeto 4">
+                    </div>
+                    <div class="carrossel-item">
+                        <img src="img/olaf ou algo do tipo.jfif" alt="Projeto 5">
+                    </div>
+                </div>
+            </div>
+            <div class="carrossel-botoes">
+                <button class="btn-carrossel" id="btn-anterior" onclick="moverCarrossel(-1)">← Anterior</button>
+                <button class="btn-carrossel" id="btn-proximo" onclick="moverCarrossel(1)">Próximo →</button>
+            </div>
+        </div>
+        
+        <script>
+            var slideAtual = 0;
+            var totalSlides = 5;
+            var carrossel = document.getElementById('carrossel');
+            var btnAnterior = document.getElementById('btn-anterior');
+            var btnProximo = document.getElementById('btn-proximo');
+            
+            function atualizarCarrossel() {
+                var translateX = -(slideAtual * 20);
+                carrossel.style.transform = 'translateX(' + translateX + '%)';
+                
+                // Atualizar estado dos botões
+                btnAnterior.disabled = (slideAtual === 0);
+                btnProximo.disabled = (slideAtual === totalSlides - 1);
+            }
+            
+            function moverCarrossel(direcao) {
+                slideAtual += direcao;
+                
+                // Limitar entre 0 e totalSlides - 1
+                if (slideAtual < 0) {
+                    slideAtual = 0;
+                } else if (slideAtual >= totalSlides) {
+                    slideAtual = totalSlides - 1;
+                }
+                
+                atualizarCarrossel();
+            }
+            
+            // Inicializar estado dos botões
+            atualizarCarrossel();
+        </script>
 
-</table>
+        <!-- Iframes -->
+        <div class="iframe-container">
+            <h2>Localização e Vídeos</h2>
+            <div class="iframe-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7907.922891673966!2d-35.51629905514537!3d-7.687286669319434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab93adfcb09769%3A0xb5c9925235143a62!2sMachados%2C%20PE!5e0!3m2!1spt-BR!2sbr!4v1755558647357!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/dX9GsvYo_GI?si=Svvrn-qxlq5jrjlT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/HN5echqwhAE?si=5OiSkx5PAZMRsxCd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/YULJ4WIqN8U?si=HvkpMtb4h9menWvG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/YULJ4WIqN8U?si=HvkpMtb4h9menWvG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
+        <!-- Seção Contato -->
+        <div class="contato">
+            <h2>Entre em Contato</h2>
+            <div class="contato-links">
+                <a href="/projects.html">Ver Projetos</a>
+                <a href="https://github.com/Luan0Oliveira0acc" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
-
